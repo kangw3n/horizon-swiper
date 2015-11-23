@@ -98,7 +98,7 @@
 
       var windowLoadFunction = function () {
         if ( that.initialized ) {
-          that.setSizes();
+          that._setSizes();
         } else {
           setTimeout( () => {
             windowLoadFunction();
@@ -126,7 +126,7 @@
       that._addArrows();
       that._addDots();
       that._mouseDrag();
-      that.setSizes();
+      that._setSizes();
       that._resize();
 
       that._checkPosition();
@@ -136,8 +136,10 @@
 
     /**
      * Set variable sizes
+     *
+     * @private
      */
-    Plugin.prototype.setSizes = function () {
+    Plugin.prototype._setSizes = function () {
       var that = this;
       that.maxHeight = 0;
       that.innerContainerWidth = 0;
@@ -184,7 +186,7 @@
        var resizeTimeout = null;
 
        var resizeFunction = function () {
-         that.setSizes();
+         that._setSizes();
          that._checkPosition();
        };
 
@@ -262,8 +264,6 @@
       var $target = that.$dots.find( '[data-horizon-index="' + horizonTarget + '"]' );
       var targetWidth = $target.outerWidth( true );
       var leftOffset = 0;
-      var scrollTo = 0;
-      var centerValue = ( that.viewportSize / 2 ) - ( targetWidth / 2 );
 
       that.isAnimate = true;
       that.settings.onSlideStart();
@@ -274,16 +274,8 @@
         }
       }
 
-      scrollTo = ( leftOffset - centerValue );
-
-      if ( scrollTo < 0 ) {
-        scrollTo = 0;
-      } else if ( scrollTo > ( that.innerContainerWidth - that.viewportSize ) ) {
-        scrollTo = ( that.innerContainerWidth - that.viewportSize );
-      }
-
       that.$inner.animate( {
-        scrollLeft: scrollTo
+        scrollLeft: leftOffset
       }, that.settings.animationSpeed, () => {
         that._checkPosition();
         that.settings.onSlideEnd();
