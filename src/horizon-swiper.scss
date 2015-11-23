@@ -20,6 +20,13 @@
     box-sizing: border-box;
   }
 
+  a,
+  button {
+    &:focus {
+      outline: none;
+    }
+  }
+
   &.mouse-drag,
   &.mouse-drag * {
     -webkit-user-select: none;
