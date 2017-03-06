@@ -22,6 +22,16 @@ Try it on touch devices!
 $('.horizon-swiper').horizonSwiper();
 ```
 
+### With Menu Active
+```
+$('.horizon-swiper').horizonSwiper({
+  checkOn: true, // default true, to enable active position to be visible in view while item itself is out of position
+  onClass: 'on', // default on, set class name that represent current active pages or classes.
+  });
+```
+
+
+
 ### Browser support
 * Google Chrome
 * Mozilla FireFox
